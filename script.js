@@ -9,6 +9,7 @@ $(window).load(function() {
   var restart = $(".restart");
   var form = $(".form");
   var tries = 0;
+  answer.text("I bet you wont get it!");
 
   count.text(tries);
 
@@ -48,12 +49,16 @@ $(window).load(function() {
     $(this).replaceWith("<div class='number' >" + randomNumber + "</div>");
     return false;
   });
+
+  restart.click(function() {
+    location.reload();
+  });
 });
 
 var inputIsValid = function(rawInput, input) {
   var message;
   if (isNaN(rawInput)) {
-    message = "This isn't a number!";
+    message = "That isn't a number!";
     return message;
   } else {
     if (input === 0 || input % Math.floor(input) === 0) {

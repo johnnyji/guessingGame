@@ -4,6 +4,10 @@ html, body {
   box-sizing: border-box;
   font-family: sans-serif;
   font-weight: lighter;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  transition: color 0.3s ease;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -16,7 +20,7 @@ html, body {
   -o-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
   left: 50%;
-  top: 50%;
+  top: 40%;
   width: 60vw;
   height: 80vh;
   background-color: #;
@@ -42,14 +46,14 @@ form {
 }
 
 input.input-field {
+  margin-bottom: 1em;
   outline: none;
   border-style: none;
-  width: 60px;
+  width: 150px;
   height: auto;
   font-size: 2em;
   text-align: center;
   color: #049372;
-  background-color: transparent;
 }
 
 button {
@@ -63,6 +67,11 @@ button {
   color: #fff;
 }
 
+button:hover {
+  background-color: #049372;
+  cursor: pointer;
+}
+
 .counter {
   position: relative;
   margin: 2em auto 0 auto;
@@ -74,6 +83,11 @@ button {
   margin: 2em auto;
   color: #2ecc71;
   display: none;
+}
+
+.restart:hover {
+  cursor: pointer;
+  color: #19b698;
 }
 
 .hint, .number {
