@@ -6,6 +6,7 @@ $(window).load(function() {
   var title = $(".title");
   var answer = $(".answer");
   var reveal = $(".reveal");
+  var restart = $(".restart");
   var form = $(".form");
   var tries = 0;
 
@@ -29,19 +30,17 @@ $(window).load(function() {
           answer.removeClass("error");
         }
         answer.text(winningMessage(message, tries));
-        form.fadeOut(300);
-        console.log("matched");
+        $(this).fadeOut(300);
+        restart.fadeIn();
       } else {
         answer.addClass("error").text("Nope! Try again");
         inputField.val("");
-        console.log("not matched");
       }
 
     } else {
       answer.addClass("error");
       answer.text(validNumber);
       inputField.val("");
-      console.log("not a num");
     }
   });
 
@@ -52,7 +51,6 @@ $(window).load(function() {
 });
 
 var inputIsValid = function(rawInput, input) {
-  console.log(rawInput, input);
   var message;
   if (isNaN(rawInput)) {
     message = "This isn't a number!";

@@ -19,7 +19,7 @@ html, body {
   top: 50%;
   width: 60vw;
   height: 80vh;
-  background-color: #dbdbdb;
+  background-color: #;
 }
 
 header {
@@ -67,6 +67,13 @@ button {
   position: relative;
   margin: 2em auto 0 auto;
   text-align: center;
+}
+
+.restart {
+  text-align: center;
+  margin: 2em auto;
+  color: #2ecc71;
+  display: none;
 }
 
 .hint, .number {
