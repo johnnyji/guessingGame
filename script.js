@@ -11,7 +11,8 @@ $(window).load(function() {
 
   count.text(tries);
 
-  form.submit(function() {
+  form.submit(function(e) {
+    e.preventDefault();
     var inputNumber = parseFloat(inputField.val());
     tries ++;
     count.text(tries);
@@ -22,6 +23,9 @@ $(window).load(function() {
     if (inputIsValid(inputField.val(), inputNumber)) {
 
       if (numberIsMatched(inputNumber, randomNumber)) {
+        if (answer.hasClass("error")) {
+          answer.removeClass("error");
+        }
         answer.text(winningMessage(message, tries));
       } else {
         answer.addClass("error").text("Nope! Try again");
@@ -32,10 +36,7 @@ $(window).load(function() {
       answer.addClass("error");
       answer.text(message);
       inputField.val("");
-      // return false;
     }
-
-    return false;
   });
 
   reveal.click(function() {
