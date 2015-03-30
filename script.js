@@ -6,25 +6,25 @@ $(window).load(function() {
   var title = $(".title");
   var answer = $(".answer");
   var reveal = $(".reveal");
+  var form = $(".form");
   var tries = 0;
 
   count.text(tries);
 
-  $(".form").submit(function() {
+  form.submit(function() {
     var inputNumber = parseFloat(inputField.val());
     tries ++;
     count.text(tries);
-    answer.removeClass("error");
+    if (answer.hasClass("error")) {
+      answer.removeClass("error");
+    }
 
-    if (validateInput(inputField.val(), inputNumber)) {
+    if (inputIsValid(inputField.val(), inputNumber)) {
 
-      if (matchedNumber(inputNumber, randomNumber)) {
+      if (numberIsMatched(inputNumber, randomNumber)) {
         answer.text(winningMessage(message, tries));
-        $(this).fadeOut(300);
-        // return false;
       } else {
-        answer.addClass("error");
-        answer.text("Nope! Try again");
+        answer.addClass("error").text("Nope! Try again");
         inputField.val("");
       }
 
@@ -32,17 +32,19 @@ $(window).load(function() {
       answer.addClass("error");
       answer.text(message);
       inputField.val("");
+      // return false;
     }
-    
+
     return false;
   });
 
   reveal.click(function() {
     $(this).replaceWith("<div class='number' >" + randomNumber + "</div>");
+    return false;
   });
 });
 
-var validateInput = function(rawInput, input) {
+var inputIsValid = function(rawInput, input) {
   if (isNaN(rawInput)) {
     message = "This isn't a number!";
     return false;
@@ -64,7 +66,7 @@ var validateInput = function(rawInput, input) {
   }
 }
 
-var matchedNumber = function(inputNumber, randomNumber) {
+var numberIsMatched = function(inputNumber, randomNumber) {
   if (inputNumber === randomNumber) {
     return true;
   } else {
