@@ -13,29 +13,35 @@ $(window).load(function() {
 
   form.submit(function(e) {
     e.preventDefault();
+    var message;
     var inputNumber = parseFloat(inputField.val());
+    var validNumber = inputIsValid(inputField.val(), inputNumber);
     tries ++;
     count.text(tries);
     if (answer.hasClass("error")) {
       answer.removeClass("error");
     }
 
-    if (inputIsValid(inputField.val(), inputNumber)) {
+    if (validNumber === true) {
 
       if (numberIsMatched(inputNumber, randomNumber)) {
         if (answer.hasClass("error")) {
           answer.removeClass("error");
         }
         answer.text(winningMessage(message, tries));
+        form.fadeOut(300);
+        console.log("matched");
       } else {
         answer.addClass("error").text("Nope! Try again");
         inputField.val("");
+        console.log("not matched");
       }
 
     } else {
       answer.addClass("error");
-      answer.text(message);
+      answer.text(validNumber);
       inputField.val("");
+      console.log("not a num");
     }
   });
 
@@ -46,23 +52,25 @@ $(window).load(function() {
 });
 
 var inputIsValid = function(rawInput, input) {
+  console.log(rawInput, input);
+  var message;
   if (isNaN(rawInput)) {
     message = "This isn't a number!";
-    return false;
+    return message;
   } else {
     if (input === 0 || input % Math.floor(input) === 0) {
       if (input < 0) {
         message = "Your number is too low! Between 0 - 100 please.";
-        return false;
+        return message;
       } else if (input > 100) {
         message = "Your number is too high! Between 0 - 100 please.";
-        return false;
+        return message;
       } else {
         return true;
       }
     } else {
       message = "Whole numbers only please.";
-      return false;
+      return message;
     }
   }
 }
