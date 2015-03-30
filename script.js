@@ -14,17 +14,26 @@ $(window).load(function() {
     var inputNumber = parseFloat(inputField.val());
     tries ++;
     count.text(tries);
+    answer.removeClass("error");
 
     if (validateInput(inputField.val(), inputNumber)) {
+
       if (matchedNumber(inputNumber, randomNumber)) {
-        // somehow prevent the form from resubmitting if the correct answer was already guessed
         answer.text(winningMessage(message, tries));
+        $(this).fadeOut(300);
+        // return false;
       } else {
-        message = "Nope! Try again"
-        answer.text(message);
+        answer.addClass("error");
+        answer.text("Nope! Try again");
         inputField.val("");
       }
+
+    } else {
+      answer.addClass("error");
+      answer.text(message);
+      inputField.val("");
     }
+    
     return false;
   });
 
